@@ -35,6 +35,7 @@ task_api/__init__.py         # create_app(): JSON provider, CORS/404/500 hooks
 task_api/models.py           # enums, Task, request/response DTOs
 task_api/go_compat.py        # Go JSON encoder, RFC3339 time, Gin binder, validator messages
 task_api/handlers.py         # Blueprint with the seven routes
+task_api/gin_router.py       # Gin radix-tree router emulation (404/redirect/OPTIONS semantics)
 task_api/services/task_service.py  # in-memory store
 tests/unit, tests/api        # pytest suites (Flask test client)
 tests/contract               # black-box HTTP suite driven by BASE_URL
