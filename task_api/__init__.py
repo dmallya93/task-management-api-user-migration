@@ -87,6 +87,13 @@ def _gin_route() -> Response | None:
         return _go_bad_request()
 
     method = request.method
+    if method == "OPTIONS" and target.path == "*" and not target.raw_query:
+        # net/http's serverHandler answers "OPTIONS *" itself (globalOptionsHandler).
+        g.setdefault(_NO_CORS, True)
+        resp = empty_response(200)
+        resp.headers["Content-Length"] = "0"
+        return resp
+
     router: GinRouter = current_app.extensions[_ROUTER_KEY]
     match = router.lookup(method, target.path)
 
